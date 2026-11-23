@@ -91,9 +91,9 @@ const MODULES=Object.assign({
  chauffage:true,   /* tuile + onglet Chauffage (climate.*) */
  scenarios:true,   /* onglet Scénarios du menu Maison */
  voiture:false,    /* borne / voiture électrique */
- ballon:true,      /* ballon d'eau chaude (ECS) */
+ ballon:false,     /* ballon d'eau chaude (ECS) */
  rappels:false,     /* bouton 🔔 RAPPELS (poubelles, anniversaires…) */
- chauffeeau:true,  /* tuile Chauffe-eau (sondes haute/basse, grande chauffe, désinfection) */
+ chauffeeau:false, /* tuile Chauffe-eau (sondes haute/basse, grande chauffe, désinfection) */
  watt:true         /* assistant Watt 👷 */
 },__C.modules||{});
 
