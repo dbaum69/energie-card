@@ -90,7 +90,7 @@ const MODULES=Object.assign({
  volets:false,      /* tuile + onglet Volets */
  chauffage:true,   /* tuile + onglet Chauffage (climate.*) */
  scenarios:true,   /* onglet Scénarios du menu Maison */
- voiture:true,     /* borne / voiture électrique */
+ voiture:false,    /* borne / voiture électrique */
  ballon:true,      /* ballon d'eau chaude (ECS) */
  rappels:false,     /* bouton 🔔 RAPPELS (poubelles, anniversaires…) */
  chauffeeau:true,  /* tuile Chauffe-eau (sondes haute/basse, grande chauffe, désinfection) */
@@ -274,7 +274,8 @@ const ND=[{k:'house',n:'MAISON',c:'#ffe34a',get:()=>derived().house,sub:()=>'con
  {k:'bat',n:'BATTERIES',c:'#2dff8a',get:()=>derived().chg-derived().dis,sub:()=>derived().chg>=derived().dis?'▲ charge':'▼ décharge',ser:()=>UN.map((u,i)=>unitP(i)),ic:IC.bat},
  {k:'grid',n:'RÉSEAU',c:'#ff5a4a',get:()=>D.grid,sub:()=>D.grid>=0?'import':'export',ser:()=>[SER.grid],ic:IC.grid},
  {k:'ev',n:'VOITURE',c:'#4de1ff',get:()=>D.ev,sub:()=>evSub(),ser:()=>[SER.ev,SER.evSoc],ic:IC.ev},
- {k:'ecs',n:'BALLON ECS',c:'#ff9a3b',get:()=>D.ecs,sub:()=>D.temps.length&&/ballon|ecs|eau/i.test(D.temps[0].name)?fr(D.temps[0].val,0)+' °C':'chauffe',ser:()=>[SER.ecs],ic:IC.ecs}];
+ {k:'ecs',n:'BALLON ECS',c:'#ff9a3b',get:()=>D.ecs,sub:()=>D.temps.length&&/ballon|ecs|eau/i.test(D.temps[0].name)?fr(D.temps[0].val,0)+' °C':'chauffe',ser:()=>[SER.ecs],ic:IC.ecs}]
+ .filter(t=>t.k!=='ev'||MODULES.voiture).filter(t=>t.k!=='ecs'||MODULES.ballon);
 const ROW=[46,122,198,274,350];
 ND.forEach((t,i)=>{const y=ROW[i]+35,d=`M372,230 C470,230 490,${y} 592,${y}`;
  t.bg=svgEl('path',{d,fill:'none','stroke-linecap':'round','stroke-width':10,stroke:t.c,'stroke-opacity':.2},fx);
